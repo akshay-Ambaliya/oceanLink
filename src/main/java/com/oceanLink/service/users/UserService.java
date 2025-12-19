@@ -12,4 +12,8 @@ public interface UserService {
     List<UserDTO> findAllUser();
 
     Optional<UserDTO> findUserById(int id);
+
+    Optional<UserDTO> updateUser(UserDTO userDTO,int ind);
+
+    boolean deleteUser(int id);
 }

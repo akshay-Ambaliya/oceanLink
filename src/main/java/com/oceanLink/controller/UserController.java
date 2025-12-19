@@ -38,10 +38,27 @@ public class UserController {
     public ResponseEntity<UserDTO> findUSerById(@PathVariable int id){
         Optional<UserDTO> dto= service.findUserById(id);
 
-        if(dto.isEmpty()){
+        if(dto.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(dto.get());
+    }
+
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO user,@PathVariable int id){
+        Optional<UserDTO> dto= service.updateUser(user,id);
+
+        if(dto.isPresent())
+            return ResponseEntity.ok(dto.get());
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<UserDTO> deleteUser(@PathVariable int id){
+        return (service.deleteUser(id))
+                ?ResponseEntity.noContent().build() // 204 :: Approach Worked But nothing to Display
+                :ResponseEntity.notFound().build(); // 404 :: Not Found
     }
 }
