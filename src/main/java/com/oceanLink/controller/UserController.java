@@ -1,6 +1,6 @@
 package com.oceanLink.controller;
 
-import com.oceanLink.dto.UserDTO;
+import com.oceanLink.dto.user.UserDTO;
 import com.oceanLink.model.User;
 import com.oceanLink.service.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/")
@@ -35,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserDTO> findUSerById(@PathVariable int id){
+    public ResponseEntity<UserDTO> findUSerById(@PathVariable long id){
         Optional<UserDTO> dto= service.findUserById(id);
 
         if(dto.isEmpty()) {
@@ -46,7 +45,7 @@ public class UserController {
 
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO user,@PathVariable int id){
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO user,@PathVariable long id){
         Optional<UserDTO> dto= service.updateUser(user,id);
 
         if(dto.isPresent())

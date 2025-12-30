@@ -1,4 +1,4 @@
-package com.oceanLink.dto;
+package com.oceanLink.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
