@@ -1,12 +1,11 @@
 package com.oceanLink.service.users;
 
-import com.oceanLink.dto.UserDTO;
+import com.oceanLink.dto.user.UserDTO;
 import com.oceanLink.model.User;
 import com.oceanLink.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<UserDTO> findUserById(int id) {
+    public Optional<UserDTO> findUserById(Long id) {
         return userrepo.findById(id)
                 .map(user -> new UserDTO(
                         user.getFullName(),
@@ -47,7 +46,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<UserDTO> updateUser(UserDTO user,int id) {
+    public Optional<UserDTO> updateUser(UserDTO user,Long id) {
 
         Optional<User> temp = userrepo.findById(id);
 
@@ -70,7 +69,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean deleteUser(int id) {
+    public boolean deleteUser(long id) {
 
         if(userrepo.existsById(id))
         {
