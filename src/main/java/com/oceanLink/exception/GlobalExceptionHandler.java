@@ -2,9 +2,12 @@ package com.oceanLink.exception;
 
 import com.oceanLink.exception.Booking.BookingNotFoundException;
 import com.oceanLink.exception.Passenger.PassengerNotFoundException;
+import com.oceanLink.exception.Payment.PaymentNotFoundException;
 import com.oceanLink.exception.Route.RouteNotFoundException;
 import com.oceanLink.exception.Ship.ShipNotFoundException;
+import com.oceanLink.exception.Ticket.TicketNotFoundException;
 import com.oceanLink.exception.User.UserNotFoundException;
+import com.oceanLink.model.Payment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -70,9 +73,30 @@ public class GlobalExceptionHandler {
     {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                 Map.of(
-                    "status",404,
+                    "success",false,
                     "message",ex.getMessage()
                 )
         );
     }
+
+    @ExceptionHandler(TicketNotFoundException.class)
+    public ResponseEntity<?> TicketNotFoundExceptionHandeler(TicketNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                Map.of(
+                        "success",false,
+                        "message",ex.getMessage()
+                )
+        );
+    }
+
+    @ExceptionHandler(PaymentNotFoundException.class)
+    public ResponseEntity<?> PaymentNotFoundExceptionHandeler(PaymentNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                Map.of(
+                        "success",false,
+                        "message",ex.getMessage()
+                )
+        );
+    }
+
 }
