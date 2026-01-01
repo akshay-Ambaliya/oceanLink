@@ -1,6 +1,7 @@
 package com.oceanLink.exception;
 
 import com.oceanLink.exception.Booking.BookingNotFoundException;
+import com.oceanLink.exception.Passenger.PassengerNotFoundException;
 import com.oceanLink.exception.Route.RouteNotFoundException;
 import com.oceanLink.exception.Ship.ShipNotFoundException;
 import com.oceanLink.exception.User.UserNotFoundException;
@@ -60,6 +61,17 @@ public class GlobalExceptionHandler {
                 Map.of(
                         "success",false,
                         "message",ex.getMessage()
+                )
+        );
+    }
+
+    @ExceptionHandler(PassengerNotFoundException.class)
+    public ResponseEntity<?> PassengerNotFoundException(PassengerNotFoundException ex)
+    {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                Map.of(
+                    "status",404,
+                    "message",ex.getMessage()
                 )
         );
     }
